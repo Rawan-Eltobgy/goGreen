@@ -44,7 +44,6 @@ function VehicleListItem({vehicle, index}: VehiclesListProps) {
 }
 const styles = StyleSheet.create({
   containerContent: {
-    flex: 1,
     flexDirection: 'row',
     width: '95%',
     backgroundColor: colors.white,
@@ -69,8 +68,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
-
-    elevation: 12,
+    elevation: 15,
   },
   vehicleImage: {
     width: responsiveWidth(40),

@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   containerContentStyle: {
-    // flexGrow: 1,
+    // flex: 1,
+    alignItems: 'center',
     flexDirection: 'column',
     paddingBottom: 5,
   },
