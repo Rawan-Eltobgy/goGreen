@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
   responsiveHeight,
@@ -10,11 +10,15 @@ import {
 } from '../utils';
 import {colors} from '../config/styles';
 
+// type VehicleObjectProps ={
+
+// }
+
 type VehiclesListProps = {
   vehicle: Object; //to add a specific type later
   currentIndex: number;
 };
-function VehicleListItem({vehicle, index}: VehiclesListProps) {
+function VehicleListItem({vehicle, currentIndex}: VehiclesListProps) {
   const {brand, imageUrl, model, version} = vehicle;
   const navigation = useNavigation();
 
@@ -42,7 +46,10 @@ function VehicleListItem({vehicle, index}: VehiclesListProps) {
         <TouchableOpacity
           style={styles.showMoreContainer}
           onPress={() => {
-            navigation.navigate('VehicleDetails');
+            navigation.navigate('VehicleDetails', {
+              vehicle,
+              currentIndex,
+            });
           }}>
           <Text style={styles.moreText}>View Details</Text>
           <Icon name="arrow-right-circle" color={colors.black} size={15} />
