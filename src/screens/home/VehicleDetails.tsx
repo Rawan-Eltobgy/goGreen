@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../config';
@@ -34,8 +35,13 @@ function VehicleDetails() {
   });
 
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <Text>Hello WoHGHGrld</Text>
+    <View style={styles.container}>
+      {/* <View style={styles.vehicleMainDetailsContainer}> */}
+      <LinearGradient pointerEvents="none" colors={[colors.greenGradient, colors.limeGreen]} style={styles.vehicleMainDetailsContainer}>
+      <Text>Navigate</Text>
+
+</LinearGradient>
+      {/* </View> */}
       <TouchableOpacity>
         <Text>Navigate</Text>
       </TouchableOpacity>
@@ -43,4 +49,17 @@ function VehicleDetails() {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+    flex: 1,
+    alignItems: 'center',
+  },
+  vehicleMainDetailsContainer: {
+    backgroundColor: colors.limeGreen,
+    borderRadius: 20,
+    height: 100,
+    width: 100
+  },
+});
 export default VehicleDetails;
