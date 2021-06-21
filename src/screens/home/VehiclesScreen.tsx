@@ -42,8 +42,8 @@ function VehiclesScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 15,
-    marginVertical: 50
+    marginHorizontal: 10,
+    marginTop: 50
   },
   searchView: {
     borderRadius: 35,

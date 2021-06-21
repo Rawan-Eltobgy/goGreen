@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -28,6 +29,11 @@ function VehicleListItem({vehicle, index}: VehiclesListProps) {
       <View style={styles.detailsContainer}>
         <Text style={styles.brandText}>{brand}</Text>
         <Text style={styles.modelText}>{model}</Text>
+        <Icon.Button name="energy" backgroundColor="#fff" solid>
+    <Text style={{ fontFamily: 'Arial', fontSize: 15 }}>
+     {version}
+    </Text>
+  </Icon.Button>
       </View>
     </View>
   );
@@ -38,6 +44,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     backgroundColor: colors.white,
+    borderRadius: responsiveWidth(5),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   imageContainer: {
     backgroundColor: colors.white,
@@ -60,6 +75,8 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
     paddingHorizontal: 15,
+    paddingVertical: 10
+    // justifyContent: 'center' 
   },
   brandText: {
     fontSize: responsiveScreenFontSize(16),
@@ -69,6 +86,7 @@ const styles = StyleSheet.create({
   },
   modelText: {
     fontSize: responsiveScreenFontSize(14),
+    color: colors.tabsTextColor,
     // fontWeight: 'bold',
   },
 });
