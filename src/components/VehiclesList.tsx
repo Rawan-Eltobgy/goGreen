@@ -6,7 +6,7 @@ import {
   responsiveHeight,
   responsiveWidth,
   responsiveScreenFontSize,
-  generateShortId
+  generateShortId,
 } from '../utils';
 import {colors} from '../config/styles';
 
@@ -15,7 +15,6 @@ type VehiclesListProps = {
 };
 function VehiclesList({data}: VehiclesListProps) {
   //   const {brand, model, version} = data;
-
 
   return (
     <View style={styles.container}>
@@ -46,12 +45,11 @@ const styles = StyleSheet.create({
   containerContentStyle: {
     // flexGrow: 1,
     flexDirection: 'column',
-    flexWrap: 'wrap',
-    paddingBottom: 8,
+    paddingBottom: 5,
   },
   separator: {
-    marginVertical: 10
-  }
+    marginVertical: 10,
+  },
 });
 
 export default VehiclesList;

@@ -29,11 +29,15 @@ function VehicleListItem({vehicle, index}: VehiclesListProps) {
       <View style={styles.detailsContainer}>
         <Text style={styles.brandText}>{brand}</Text>
         <Text style={styles.modelText}>{model}</Text>
-        <Icon.Button name="energy" backgroundColor="#fff" solid>
-    <Text style={{ fontFamily: 'Arial', fontSize: 15 }}>
-     {version}
-    </Text>
-  </Icon.Button>
+        <View style={styles.energyContainer}>
+          <Icon.Button
+            name="energy"
+            backgroundColor={colors.limeGreen}
+            color="#fff"
+            size={15}>
+            <Text style={styles.versionText}>{version}</Text>
+          </Icon.Button>
+        </View>
       </View>
     </View>
   );
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
   containerContent: {
     flex: 1,
     flexDirection: 'row',
-    width: '100%',
+    width: '95%',
     backgroundColor: colors.white,
     borderRadius: responsiveWidth(5),
     shadowColor: '#000',
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     backgroundColor: colors.white,
+    justifyContent: 'center',
     borderRadius: responsiveWidth(5),
     shadowColor: '#000',
     shadowOffset: {
@@ -75,8 +80,8 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
     paddingHorizontal: 15,
-    paddingVertical: 10
-    // justifyContent: 'center' 
+    paddingVertical: 15,
+    // justifyContent: 'center'
   },
   brandText: {
     fontSize: responsiveScreenFontSize(16),
@@ -87,8 +92,17 @@ const styles = StyleSheet.create({
   modelText: {
     fontSize: responsiveScreenFontSize(14),
     color: colors.tabsTextColor,
+    marginBottom: 5,
     // fontWeight: 'bold',
   },
+  versionText: {
+    fontSize: responsiveScreenFontSize(14),
+    color: colors.white,
+  },
+  energyContainer: {
+    marginVertical: 5,
+    width: '65%'
+  }
 });
 
 export default VehicleListItem;
