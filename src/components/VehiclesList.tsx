@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native-ui-lib';
-import {FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {VehicleListItem} from '../components';
 import {
@@ -19,20 +18,20 @@ function VehiclesList({data}: VehiclesListProps) {
 
 
   return (
-    <View marginV-20 centerH>
+    <View style={styles.container}>
       {data ? (
         <FlatList
           data={data}
-          renderItem={({item,index}) => <VehicleListItem vehicle={item} currentIndex={index} />}
-          // style={{marginTop: 10}}
+          renderItem={({item, index}) => (
+            <VehicleListItem vehicle={item} currentIndex={index} />
+          )}
           keyExtractor={() => generateShortId()}
-          // style={{ flex: 1 }}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.containerContentStyle}
-          ItemSeparatorComponent={() => <View marginV-15 />}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       ) : (
-        <View center>
+        <View>
           <Text>No data found !</Text>
         </View>
       )}
@@ -40,12 +39,19 @@ function VehiclesList({data}: VehiclesListProps) {
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginVertical: 20,
+  },
   containerContentStyle: {
-    flexGrow: 1,
+    // flexGrow: 1,
     flexDirection: 'column',
     flexWrap: 'wrap',
     paddingBottom: 8,
   },
+  separator: {
+    marginVertical: 10
+  }
 });
 
 export default VehiclesList;

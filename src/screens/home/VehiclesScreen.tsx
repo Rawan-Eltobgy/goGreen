@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {TextField, View} from 'react-native-ui-lib';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {TextField} from 'react-native-ui-lib';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {VehiclesList} from '../../components'
 import {
@@ -18,7 +18,7 @@ function VehiclesScreen({navigation}) {
   };
 
   return (
-    <View marginH-15 marginV-50>
+    <View style={styles.container}>
       <TouchableOpacity style={styles.searchView}>
         <TextField
           style={styles.inputStyle}
@@ -40,6 +40,11 @@ function VehiclesScreen({navigation}) {
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginHorizontal: 15,
+    marginVertical: 50
+  },
   searchView: {
     borderRadius: 35,
     borderColor: colors.darkGrey,
