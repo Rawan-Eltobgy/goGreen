@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TextField} from 'react-native-ui-lib';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {VehiclesList} from '../../components'
+import {VehiclesList} from '../../components';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -35,7 +35,7 @@ function VehiclesScreen({navigation}) {
           clearButtonMode="while-editing"
         />
       </TouchableOpacity>
-      <VehiclesList data={vehiclesData} />
+      <VehiclesList />
     </View>
   );
 }
