@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 10,
-    marginTop: 50
+    marginTop: 50,
   },
   searchView: {
     borderRadius: 35,
