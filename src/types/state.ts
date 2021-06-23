@@ -1,9 +1,5 @@
 import {Dispatch} from 'redux';
 
-export interface UsersState {
-  isAuthenticated: boolean;
-  loginToken: string;
-}
 export interface Vehicle {
   id: string;
   brand: string;

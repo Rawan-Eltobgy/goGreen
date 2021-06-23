@@ -19,7 +19,6 @@ export function* fetchVehiclesDataAsync(action: any) {
   const state = yield select();
   const {limit, page} = action.payload;
   const url = `${settings.API_URL}?limit=${limit}&page=${page}`;
-  console.log('limit, page: ', limit, page);
   try {
     const response: IResponse = yield call(axios.get, url);
     let result = response.data;

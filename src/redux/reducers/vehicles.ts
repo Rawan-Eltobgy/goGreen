@@ -1,4 +1,3 @@
-
 import {VehiclesActions} from 'types/actions';
 import {VehiclesState} from 'types/state';
 import {
@@ -7,13 +6,13 @@ import {
   FETCH_DATA_FAILURE,
 } from '../store/actionTypes';
 
-export const vehicleState: VehiclesState = {
+export const vehiclesState: VehiclesState = {
   vehicles: [],
   error: '',
   isLoading: false,
 };
 
-export default (state = vehicleState, action: VehiclesActions) => {
+export default (state = vehiclesState, action: VehiclesActions) => {
   switch (action.type) {
     case FETCH_DATA_REQUEST:
       return {

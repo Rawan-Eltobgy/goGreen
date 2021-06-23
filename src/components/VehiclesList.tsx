@@ -8,7 +8,7 @@ import {
   RefreshControl,
   Dimensions,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {VehicleListItem} from '../components';
 import {fetchDataRequest} from '../redux/actions/vehicles';
 import {
@@ -18,7 +18,9 @@ import {
   generateShortId,
 } from '../utils';
 import {colors} from '../config/styles';
-import vehiclesData from '../vehicleList.json';
+// import vehiclesData from '../vehicleList.json';
+import {VehiclesState} from '../types/state';
+import {render} from '@testing-library/react';
 
 // type VehiclesListProps = {
 //   data?: Array<Object>;
@@ -33,68 +35,54 @@ const VIEWABILITY_CONFIG = {
 function VehiclesList() {
   //   const {brand, model, version} = data;
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [hasMoreToLoad, setHasMoreToLoad] = useState(true);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(7);
   const dispatch = useDispatch();
 
+  const vehiclesState: VehiclesState = useSelector(
+      (state: any) => state.vehiclesReducer,
+    ),
+    vehiclesData = vehiclesState?.vehicles,
+    error = vehiclesState?.error,
+    isLoading = vehiclesState?.isLoading;
+
   useEffect(() => {
+    console.log(
+      'currentPage, pages',
+      typeof currentPage,
+      typeof pages,
+      currentPage,
+      pages,
+    );
     const fetchData = async () => {
-      setLoading(true);
-      const res = await dispatch(
-        fetchDataRequest({limit: limit, page: currentPage}),
-      );
-      console.log("Vehicle List result: ",res);
-      const PAGES = Math.round(vehiclesData.length / limit);
-      setPages(PAGES);
-      setVehicles(vehiclesData);
-      setLoading(false);
+      await dispatch(fetchDataRequest({limit: limit, page: currentPage}));
     };
-    if (currentPage <= pages || (pages === 0 && currentPage === 1)) {
-      fetchData();
-    } else {
-      console.log('exiting');
-      return;
-    }
+    fetchData();
   }, [currentPage, limit]);
 
-  if (loading) {
-    //trigger a spinner
-  }
-  const fetchActiveItems = (params: any) => {
-    console.log('fetching active Items');
-    setLoading(true);
-    // dispatch(API.fetchData(params));
-  };
+  useEffect(() => {
+    console.log("log this shit: ",vehicles, vehiclesData)
+
+    if (vehicles.length > 0 && vehiclesData.length < limit) {
+      setHasMoreToLoad(false);
+    }
+    if (vehicles.length === 0) {
+      setVehicles(vehiclesData);
+    } else {
+      setVehicles([...vehicles, ...vehiclesData]);
+    }
+  }, [vehiclesData]);
+
   const handleRefresh = () => {
-    setLoading(false);
     setCurrentPage(1);
     setPages(0);
   };
 
   const loadMoreResults = () => {
     console.log('LOAD MORE RESULTS');
-    if (currentPage < pages) {
-      setCurrentPage(currentPage => currentPage + 1);
-    }
-    //check the total number of pages
-    // if (currentPage <= pages) {
-    //   // const params = {
-    //   //   data: {
-    //   //     active: 1,
-    //   //   },
-    //   //   metadata: {
-    //   //     pagination: {
-    //   //       page: nextPage,
-    //   //       limit: PAGINATION_LIMIT,
-    //   //     },
-    //   //   },
-    //   //   restartPagination: false,
-    //   // };
-
-    //   fetchActiveItems();
-    // }
+    setCurrentPage(currentPage => currentPage + 1);
   };
 
   //get current page data
@@ -103,41 +91,57 @@ function VehiclesList() {
   const currentItems = vehicles.slice(indexOfFirstItem, indexOfLastItem);
   // console.log(
   //   'current Items, index of first, indexOf lat, pages, currentPage: ',
-  //   currentItems,
-  //   indexOfFirstItem,
-  //   indexOfLastItem,
-  //   pages,
-  //   currentPage,
+  //   // currentItems,
+  //   // indexOfFirstItem,
+  //   // indexOfLastItem,
+  //   // pages,
+  //   // currentPage,
+  //   vehiclesData,
+  //   isLoading,
+  //   error,
+  //   vehiclesState,
+  //   vehiclesData,
+  //   hasMoreToLoad,
   // );
+  console.log("My current vehicle: ", vehicles)
   return (
     <View style={styles.container}>
-      {currentItems ? (
-        <FlatList
-          data={currentItems}
-          renderItem={({item, index}) => (
-            <VehicleListItem vehicle={item} currentIndex={index} />
-          )}
-          keyExtractor={() => generateShortId()}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.containerContentStyle}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          onEndReached={(d: {distanceFromEnd: number}) => {
-            if (d.distanceFromEnd > 0) {
-              console.log('onEndReached');
-              loadMoreResults();
-            }
-          }}
-          onEndReachedThreshold={0.1}
-          refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
-          }
-          removeClippedSubviews={false}
-          // viewabilityConfig={VIEWABILITY_CONFIG}
-        />
+      {isLoading ? (
+        <ActivityIndicator />
       ) : (
-        <View>
-          <Text>No data found !</Text>
-        </View>
+        <>
+          {vehicles ? (
+            <FlatList
+              data={vehicles}
+              renderItem={({item, index}) => (
+                <VehicleListItem vehicle={item} currentIndex={index} />
+              )}
+              keyExtractor={() => generateShortId()}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.containerContentStyle}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              onEndReached={(d: {distanceFromEnd: number}) => {
+                if (d.distanceFromEnd > 0 && hasMoreToLoad) {
+                  console.log('onEndReached');
+                  loadMoreResults();
+                }
+              }}
+              onEndReachedThreshold={0.1}
+              refreshControl={
+                <RefreshControl
+                  refreshing={isLoading}
+                  onRefresh={handleRefresh}
+                />
+              }
+              removeClippedSubviews={false}
+              // viewabilityConfig={VIEWABILITY_CONFIG}
+            />
+          ) : (
+            <View>
+              <Text>No data found !</Text>
+            </View>
+          )}
+        </>
       )}
     </View>
   );
