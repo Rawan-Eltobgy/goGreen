@@ -49,13 +49,6 @@ function VehiclesList() {
     isLoading = vehiclesState?.isLoading;
 
   useEffect(() => {
-    console.log(
-      'currentPage, pages',
-      typeof currentPage,
-      typeof pages,
-      currentPage,
-      pages,
-    );
     const fetchData = async () => {
       await dispatch(fetchDataRequest({limit: limit, page: currentPage}));
     };
@@ -63,8 +56,6 @@ function VehiclesList() {
   }, [currentPage, limit]);
 
   useEffect(() => {
-    console.log("log this shit: ",vehicles, vehiclesData)
-
     if (vehicles.length > 0 && vehiclesData.length < limit) {
       setHasMoreToLoad(false);
     }
@@ -81,29 +72,10 @@ function VehiclesList() {
   };
 
   const loadMoreResults = () => {
-    console.log('LOAD MORE RESULTS');
     setCurrentPage(currentPage => currentPage + 1);
   };
 
-  //get current page data
-  const indexOfLastItem = currentPage * limit;
-  const indexOfFirstItem = indexOfLastItem - limit;
-  const currentItems = vehicles.slice(indexOfFirstItem, indexOfLastItem);
-  // console.log(
-  //   'current Items, index of first, indexOf lat, pages, currentPage: ',
-  //   // currentItems,
-  //   // indexOfFirstItem,
-  //   // indexOfLastItem,
-  //   // pages,
-  //   // currentPage,
-  //   vehiclesData,
-  //   isLoading,
-  //   error,
-  //   vehiclesState,
-  //   vehiclesData,
-  //   hasMoreToLoad,
-  // );
-  console.log("My current vehicle: ", vehicles)
+  console.log('My current vehicle: ', vehicles);
   return (
     <View style={styles.container}>
       {isLoading ? (
