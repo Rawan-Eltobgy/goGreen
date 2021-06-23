@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
-import vehicles from '../reducers/vehicles';
+import vehiclesReducer from '../reducers/vehicles';
 
 const rootReducer = combineReducers({
-  vehicles,
+  vehiclesReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

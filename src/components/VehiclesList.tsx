@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {VehicleListItem} from '../components';
+import {fetchDataRequest} from '../redux/actions/vehicles';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -36,12 +37,15 @@ function VehiclesList() {
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(7);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      // const res= await (the request
+      const res = await dispatch(
+        fetchDataRequest({limit: limit, page: currentPage}),
+      );
+      console.log("Vehicle List result: ",res);
       const PAGES = Math.round(vehiclesData.length / limit);
       setPages(PAGES);
       setVehicles(vehiclesData);
@@ -97,14 +101,14 @@ function VehiclesList() {
   const indexOfLastItem = currentPage * limit;
   const indexOfFirstItem = indexOfLastItem - limit;
   const currentItems = vehicles.slice(indexOfFirstItem, indexOfLastItem);
-  console.log(
-    'current Items, index of first, indexOf lat, pages, currentPage: ',
-    currentItems,
-    indexOfFirstItem,
-    indexOfLastItem,
-    pages,
-    currentPage,
-  );
+  // console.log(
+  //   'current Items, index of first, indexOf lat, pages, currentPage: ',
+  //   currentItems,
+  //   indexOfFirstItem,
+  //   indexOfLastItem,
+  //   pages,
+  //   currentPage,
+  // );
   return (
     <View style={styles.container}>
       {currentItems ? (

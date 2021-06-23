@@ -1,10 +1,10 @@
-import { all, fork } from 'redux-saga/effects';
+import {all, fork} from 'redux-saga/effects';
 
-import vehicles from './vehicles';
+import vehiclesSaga from './vehicles';
 
 /**
  * rootSaga
  */
 export default function* rootSaga() {
-  yield all([fork(vehicles), fork(vehicles)]);
+  yield all([fork(vehiclesSaga)]);
 }

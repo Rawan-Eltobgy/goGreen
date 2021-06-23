@@ -1,4 +1,8 @@
-import {ActionTypes} from 'literals';
+import {
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILURE,
+} from '../store/actionTypes';
 import {
   FetchDataFailure,
   FetchDataSuccess,
@@ -11,20 +15,20 @@ import {
 export const fetchDataRequest = (
   payload: FetchDataRequestPayload,
 ): FetchDataRequest => ({
-  type: ActionTypes.FETCH_DATA_REQUEST,
+  type: FETCH_DATA_REQUEST,
   payload,
 });
 
 export const fetchDataSuccess = (
   payload: FetchDataSuccessPayload,
 ): FetchDataSuccess => ({
-  type: ActionTypes.FETCH_DATA_SUCCESS,
+  type: FETCH_DATA_SUCCESS,
   payload,
 });
 
 export const fetchDataFailure = (
   payload: FetchDataFailurePayload,
 ): FetchDataFailure => ({
-  type: ActionTypes.FETCH_DATA_FAILURE,
+  type: FETCH_DATA_FAILURE,
   payload,
 });
