@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {TextField} from 'react-native-ui-lib';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {VehiclesList} from '../../components';
@@ -9,7 +8,6 @@ import {
   responsiveScreenFontSize,
 } from '../../utils';
 import {colors} from '../../config/styles';
-import vehiclesData from '../../vehicleList.json';
 function VehiclesScreen({navigation}) {
   const [vehicleName, setVehicleName] = useState('');
 
@@ -19,23 +17,7 @@ function VehiclesScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.searchView}>
-        <TextField
-          style={styles.inputStyle}
-          placeholder="Search for your eco-friendly car"
-          underlineColorAndroid="transparent"
-          enableErrors={false}
-          hideUnderline
-          placeholderTextColor="#bbb"
-          onChangeText={(event: any) => {
-            onTyping(event);
-          }}
-          // onSubmitEditing={onSearch}
-          returnKeyType="search"
-          clearButtonMode="while-editing"
-        />
-      </TouchableOpacity>
-      <VehiclesList />
+      <VehiclesList  vehicleName={vehicleName} />
     </View>
   );
 }

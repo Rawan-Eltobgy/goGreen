@@ -22,7 +22,7 @@ export default (state = vehiclesState, action: VehiclesActions) => {
     case FETCH_DATA_SUCCESS:
       const newData =
         state.vehicles.length === 0
-          ? [...action.payload.data]
+          ? action.payload.data
           : [...state.vehicles, ...action.payload.data];
       return {
         ...state,

@@ -16,7 +16,6 @@ interface IResponse {
 }
 
 export function* fetchVehiclesDataAsync(action: any) {
-  const state = yield select();
   const {limit, page} = action.payload;
   const url = `${settings.API_URL}?limit=${limit}&page=${page}`;
   try {
