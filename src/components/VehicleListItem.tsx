@@ -9,13 +9,10 @@ import {
   responsiveScreenFontSize,
 } from '../utils';
 import {colors} from '../config/styles';
-
-// type VehicleObjectProps ={
-
-// }
+import {Vehicle} from '../types/state';
 
 type VehiclesListProps = {
-  vehicle: Object; //to add a specific type later
+  vehicle: Vehicle; //to add a specific type later
   currentIndex: number;
 };
 function VehicleListItem({vehicle, currentIndex}: VehiclesListProps) {

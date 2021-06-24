@@ -20,16 +20,19 @@ export default (state = vehiclesState, action: VehiclesActions) => {
         isLoading: true,
       };
     case FETCH_DATA_SUCCESS:
+      const newData =
+        state.vehicles.length === 0
+          ? [...action.payload.data]
+          : [...state.vehicles, ...action.payload.data];
       return {
         ...state,
-        vehicles: action.payload.data,
+        vehicles: newData,
         isLoading: false,
-        error: null,
+        error: '',
       };
     case FETCH_DATA_FAILURE:
       return {
         ...state,
-        vehicles: [],
         error: action.payload.error,
         isLoading: false,
       };
