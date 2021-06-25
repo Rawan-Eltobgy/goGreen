@@ -77,7 +77,7 @@ function VehiclesList() {
   return (
     <View style={styles.container}>
       {renderHeader()}
-      {isLoading && currentPage === 0 ? (
+      {isLoading && currentPage === 1 ? (
         <ActivityIndicator style={{flex: 1}} />
       ) : (
         <>
