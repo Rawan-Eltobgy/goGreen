@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
+import React from 'react';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {VehiclesList} from '../../components';
 import {
   responsiveHeight,
@@ -9,23 +8,17 @@ import {
 } from '../../utils';
 import {colors} from '../../config/styles';
 function VehiclesScreen({navigation}) {
-  const [vehicleName, setVehicleName] = useState('');
-
-  const onTyping = (movieCurrentName: React.SetStateAction<string>) => {
-    setVehicleName(movieCurrentName);
-  };
-
   return (
-    <View style={styles.container}>
-      <VehiclesList  vehicleName={vehicleName} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <VehiclesList />
+    </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 10,
-    marginTop: 50,
   },
   searchView: {
     borderRadius: 35,

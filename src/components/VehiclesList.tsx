@@ -21,7 +21,6 @@ import {
 import {colors} from '../config/styles';
 import {VehiclesState} from '../types/state';
 
-
 function VehiclesList() {
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,19 +59,18 @@ function VehiclesList() {
     setPages(0);
   };
 
+
   function renderHeader() {
     return (
       <View style={styles.searchView}>
         <TextInput
           style={styles.inputStyle}
-          placeholder="Search for your eco-friendly car"
+          placeholder="Search using brand or model"
           autoCapitalize="none"
           autoCorrect={false}
           clearButtonMode="always"
           value={query}
           onChangeText={queryText => setQuery(queryText)}
-          // placeholder="Search"
-          // onSubmitEditing={onSearch}
         />
       </View>
     );
@@ -124,8 +122,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   searchView: {
+    // display: 'flex',
     borderRadius: 35,
-    borderColor: colors.darkGrey,
+    borderColor: colors.white,
     height: responsiveHeight(5.5),
     width: '100%',
     backgroundColor: '#ffffff',
@@ -139,6 +138,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     elevation: 2,
+    marginVertical: 20,
   },
   inputStyle: {
     height: responsiveHeight(5.5),
@@ -146,6 +146,10 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: responsiveScreenFontSize(14),
     textAlignVertical: 'center',
+    paddingVertical: 0,
+  },
+  inputStyleFocused: {
+    borderColor: colors.green,
   },
   containerContentStyle: {
     alignItems: 'center',
