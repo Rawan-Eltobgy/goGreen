@@ -48,6 +48,12 @@ function VehicleDetails() {
     ),
   });
 
+  const openLinkToWebsite = () => {
+    Linking.openURL(helpUrl).catch(err => {
+      console.error('Failed opening page because: ', err);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -95,19 +101,14 @@ function VehicleDetails() {
         </View>
       </LinearGradient>
       <View style={styles.helpContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL(helpUrl).catch(err => {
-              console.error('Failed opening page because: ', err);
-              alert('Failed to open page');
-            });
-          }}>
+        <TouchableOpacity onPress={() => openLinkToWebsite()}>
           <Text style={styles.helpTitle}>NEED MORE HELP</Text>
           <Icon.Button
             name="live-help"
             backgroundColor={colors.cyanLight}
             color="#fff"
-            size={25}>
+            size={25}
+            onPress={() => openLinkToWebsite()}>
             <Text style={styles.versionText}>Visit our website</Text>
           </Icon.Button>
         </TouchableOpacity>
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(24),
     color: colors.cyanLight,
     fontWeight: 'bold',
-    marginVertical: '7%'
+    marginVertical: '7%',
   },
 });
 export default VehicleDetails;
