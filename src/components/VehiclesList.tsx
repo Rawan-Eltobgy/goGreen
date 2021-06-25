@@ -49,7 +49,7 @@ function VehiclesList() {
     setCurrentPage(1);
     const delayDebounceFn = setTimeout(() => {
       dispatch(fetchDataRequest({limit: limit, page: 1, filter: query}));
-    }, 2500);
+    }, 2000);
 
     return () => clearTimeout(delayDebounceFn);
   }, [query]);
@@ -68,7 +68,6 @@ function VehiclesList() {
           placeholder="Search using brand or model"
           autoCapitalize="none"
           autoCorrect={false}
-          clearButtonMode="always"
           value={query}
           onChangeText={queryText => setQuery(queryText)}
         />
