@@ -2,8 +2,10 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
+  EMPTY_DATA_REQUEST
 } from '../store/actionTypes';
 import {
+  EmptyDataRequest,
   FetchDataFailure,
   FetchDataSuccess,
   FetchDataRequest,
@@ -11,6 +13,10 @@ import {
   FetchDataFailurePayload,
   FetchDataSuccessPayload,
 } from '../../types/actions';
+
+export const emptyDataRequest = (): EmptyDataRequest => ({
+  type: EMPTY_DATA_REQUEST,
+});
 
 export const fetchDataRequest = (
   payload: FetchDataRequestPayload,

@@ -4,11 +4,13 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
+  EMPTY_DATA_REQUEST,
 } from '../redux/store/actionTypes';
 
 export interface FetchDataRequestPayload {
   page: number;
   limit: number;
+  filter?: string;
 }
 
 export interface FetchDataSuccessPayload {
@@ -34,7 +36,12 @@ export interface FetchDataFailure extends Action {
   payload: FetchDataFailurePayload;
 }
 
+export interface EmptyDataRequest extends Action {
+  type: typeof EMPTY_DATA_REQUEST; // !! here we assign the string literal type of the constant
+}
+
 export type VehiclesActions =
+  | EmptyDataRequest
   | FetchDataSuccess
   | FetchDataFailure
   | FetchDataRequest;

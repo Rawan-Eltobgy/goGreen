@@ -4,6 +4,7 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
+  EMPTY_DATA_REQUEST
 } from '../store/actionTypes';
 
 export const vehiclesState: VehiclesState = {
@@ -14,6 +15,12 @@ export const vehiclesState: VehiclesState = {
 
 export default (state = vehiclesState, action: VehiclesActions) => {
   switch (action.type) {
+    case EMPTY_DATA_REQUEST:
+      return {
+        ...state,
+        vehicles: [],
+        isLoading: true,
+      };
     case FETCH_DATA_REQUEST:
       return {
         ...state,

@@ -1,11 +1,12 @@
 import {all, call, delay, put, select, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
 import {
+  EMPTY_DATA_REQUEST,
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
 } from '../store/actionTypes';
-import {fetchDataFailure, fetchDataSuccess} from '../actions';
+import {fetchDataFailure, fetchDataSuccess, emptyDataRequest} from '../actions';
 import {settings} from '../../config';
 
 /**
@@ -16,12 +17,18 @@ interface IResponse {
 }
 
 export function* fetchVehiclesDataAsync(action: any) {
-  const {limit, page} = action.payload;
-  const url = `${settings.API_URL}?limit=${limit}&page=${page}`;
+  const {limit, page, filter} = action.payload;
+  let url = '';
+  //page = 1 && !!filter
+  if (filter && filter.length) {
+    url = `${settings.API_URL}?limit=${limit}&page=${page}&filter=${filter}`;
+    if (page === 1) yield all([put(emptyDataRequest())]);
+  } else {
+    url = `${settings.API_URL}?limit=${limit}&page=${page}`;
+  }
   try {
     const response: IResponse = yield call(axios.get, url);
     let result = response.data;
-
     yield all([
       put(
         fetchDataSuccess({

@@ -7,11 +7,9 @@ import {
   StyleSheet,
   RefreshControl,
   TextInput,
-  TouchableOpacity,
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
-import filter from 'lodash.filter';
 import {VehicleListItem} from '../components';
 import {fetchDataRequest} from '../redux/actions/vehicles';
 import {
@@ -22,25 +20,13 @@ import {
 } from '../utils';
 import {colors} from '../config/styles';
 import {VehiclesState} from '../types/state';
-import {
-  getPendingSelector,
-  getDataSelector,
-  getErrorSelector,
-} from '../redux/selectors/selectors';
 
-const VIEWABILITY_CONFIG = {
-  minimumViewTime: 3000,
-  viewAreaCoveragePercentThreshold: 100,
-  waitForInteraction: true,
-};
 
 function VehiclesList() {
-  const [hasMoreToLoad, setHasMoreToLoad] = useState(true);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(7);
   const [query, setQuery] = useState('');
-  const [data, setData] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -51,37 +37,27 @@ function VehiclesList() {
     error = vehiclesState?.error,
     isLoading = vehiclesState?.isLoading;
 
-
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchDataRequest({limit: limit, page: currentPage}));
+      await dispatch(
+        fetchDataRequest({limit: limit, page: currentPage, filter: query}),
+      );
     };
     fetchData();
   }, [currentPage, limit]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+    const delayDebounceFn = setTimeout(() => {
+      dispatch(fetchDataRequest({limit: limit, page: 1, filter: query}));
+    }, 2500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [query]);
+
   const handleRefresh = () => {
     setCurrentPage(1);
     setPages(0);
-  };
-
-  const handleSearch = (text: string) => {
-    setQuery(text);
-
-    const formattedQuery = text?.toLowerCase();
-    const filteredData = filter(vehiclesData, (vehicle: any) => {
-      return contains(vehicle, formattedQuery);
-    });
-    setData(filteredData);
-  };
-
-  const contains = (vehicle: {model: string; brand: string}, query: string) => {
-    const {model, brand} = vehicle;
-
-    if (brand.includes(query) || model.includes(query)) {
-      return true;
-    }
-
-    return false;
   };
 
   function renderHeader() {
@@ -94,7 +70,7 @@ function VehiclesList() {
           autoCorrect={false}
           clearButtonMode="always"
           value={query}
-          onChangeText={queryText => handleSearch(queryText)}
+          onChangeText={queryText => setQuery(queryText)}
           // placeholder="Search"
           // onSubmitEditing={onSearch}
         />
@@ -120,7 +96,7 @@ function VehiclesList() {
               contentContainerStyle={styles.containerContentStyle}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
               onEndReached={(d: {distanceFromEnd: number}) => {
-                if (d.distanceFromEnd > 0 && hasMoreToLoad) {
+                if (d.distanceFromEnd > 0) {
                   setCurrentPage(prev => prev + 1);
                 }
               }}
@@ -131,8 +107,6 @@ function VehiclesList() {
                   onRefresh={handleRefresh}
                 />
               }
-              // removeClippedSubviews={true}
-              // viewabilityConfig={VIEWABILITY_CONFIG}
             />
           ) : (
             <View>
