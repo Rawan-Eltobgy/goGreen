@@ -19,10 +19,9 @@ interface IResponse {
 export function* fetchVehiclesDataAsync(action: any) {
   const {limit, page, filter} = action.payload;
   let url = '';
-  //page = 1 && !!filter
+  if (page === 1) yield all([put(emptyDataRequest())]);
   if (filter && filter.length) {
     url = `${settings.API_URL}?limit=${limit}&page=${page}&filter=${filter}`;
-    if (page === 1) yield all([put(emptyDataRequest())]);
   } else {
     url = `${settings.API_URL}?limit=${limit}&page=${page}`;
   }
