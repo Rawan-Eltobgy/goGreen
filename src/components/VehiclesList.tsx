@@ -82,7 +82,7 @@ function VehiclesList() {
         <ActivityIndicator style={{flex: 1}} />
       ) : (
         <>
-          {vehiclesData ? (
+          {vehiclesData?.length ? (
             <FlatList
               data={vehiclesData}
               renderItem={({item, index}) => (
@@ -90,7 +90,6 @@ function VehiclesList() {
               )}
               keyExtractor={item => item?.id + generateShortId()}
               showsVerticalScrollIndicator={false}
-              // ListHeaderComponent={renderHeader}
               contentContainerStyle={styles.containerContentStyle}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
               onEndReached={(d: {distanceFromEnd: number}) => {
@@ -107,8 +106,8 @@ function VehiclesList() {
               }
             />
           ) : (
-            <View>
-              <Text>No data found !</Text>
+            <View style={styles.noDataFound}>
+              <Text style={styles.noDataFoundText}>No data found !</Text>
             </View>
           )}
         </>
@@ -158,6 +157,15 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 10,
+  },
+  noDataFound: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noDataFoundText: {
+    fontSize: responsiveScreenFontSize(20),
+    fontWeight: 'bold',
   },
 });
 

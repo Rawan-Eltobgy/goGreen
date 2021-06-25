@@ -22,11 +22,13 @@ function VehicleListItem({vehicle, currentIndex}: VehiclesListProps) {
   return (
     <View style={styles.containerContent}>
       <View style={styles.imageContainer}>
-        <Image
-          style={styles.vehicleImage}
-          source={{uri: `${imageUrl}`}}
-          resizeMode="center"
-        />
+        {imageUrl && (
+          <Image
+            style={styles.vehicleImage}
+            source={{uri: `${imageUrl}`}}
+            resizeMode="center"
+          />
+        )}
       </View>
       <View style={styles.detailsContainer}>
         <Text style={styles.brandText}>{brand}</Text>
