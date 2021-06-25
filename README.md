@@ -5,6 +5,10 @@
 * Redux-saga: [Redux-saga](https://redux-saga.js.org/).
 * Typescript: [Typescript](https://www.typescriptlang.org/docs/).
 
+### Also integrated for debugging:
+
+* React Native Debugger [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
+
 ## Installation And Running
 Clone this repository.
 
@@ -20,13 +24,13 @@ Clone this repository.
 
 ## App Flow
 
--When the user opens the app, the data gets fetched directly from goGreen service.
--User can navigate through all the data and paginate through it till he reaches the end.
--If no data fetched users gets returned a message on the screen.
--User can click on any of the vehicles to view more details about it.
--User can navigate to the website to get more data about the selected vehicle.
--User can go go back from detailsScreen to mainScreen.
--User can search for vehicles by typing any part of the "model" or "brand" and the data gets fetched from the backend accordingly. 
+- When the user opens the app, the data gets fetched directly from goGreen service.
+- User can navigate through all the data and paginate through it till he reaches the end.
+- If no data fetched users gets returned a message on the screen.
+- User can click on any of the vehicles to view more details about it.
+- User can navigate to the website to get more data about the selected vehicle.
+- User can go go back from detailsScreen to mainScreen.
+- User can search for vehicles by typing any part of the "model" or "brand" and the data gets fetched from the backend accordingly. 
 
 
 
