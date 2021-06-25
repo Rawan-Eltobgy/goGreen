@@ -1,41 +1,10 @@
-import {Dimensions, PixelRatio, Platform, StatusBar} from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import {Dimensions} from 'react-native';
 import ShortId from './shortId';
 import {constants} from '../config';
 
 export const generateShortId = () => {
   const uid = new ShortId();
   return uid.randomUUID(8);
-};
-export const removeElementFromArray = (array: any[], index: number): any[] => {
-  if (index < 0) {
-    return array;
-  }
-  let newArray: any[] = [];
-  array?.map((_, elementIndex) => {
-    if (elementIndex !== index) {
-      newArray.push(array[elementIndex]);
-    }
-  });
-  return newArray;
-};
-
-export const isEmpty = (Input: {}) => {
-  return Input ? Object.keys(Input).length === 0 : true;
-};
-
-export const isIphoneX = () => {
-  const model = DeviceInfo.getDeviceId();
-  return (
-    Platform.OS === 'ios' &&
-    model.includes('Phone') && // an iPhone
-    (Number.parseInt(model.split('Phone')[1].split(',')[0]) > 10 || // is an iPhone XS or newer
-      (Number.parseInt(model.split('Phone')[1].split(',')[0]) === 10 &&
-        [3, 6].includes(
-          Number.parseInt(model.split('Phone')[1].split(',')[1]),
-        ))) // iPhone X
-  );
-  // split iPhone version from model. ex: "iPhone11,6" => "iPhone XS Max"
 };
 
 export const responsiveScreenFontSize = (f: number) => {

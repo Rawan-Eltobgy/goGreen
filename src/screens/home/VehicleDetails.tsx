@@ -22,7 +22,7 @@ import {
 function VehicleDetails() {
   const navigation = useNavigation();
   const route = useRoute();
-  const {vehicle, currentIndex} = route.params;
+  const {vehicle} = route.params;
   const {
     imageUrl,
     brand,

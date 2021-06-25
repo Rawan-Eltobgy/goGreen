@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     width: '95%',
     backgroundColor: colors.white,
     borderRadius: responsiveWidth(5),
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     justifyContent: 'center',
     borderRadius: responsiveWidth(5),
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 6,

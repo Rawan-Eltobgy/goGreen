@@ -8,13 +8,12 @@ import {
   RefreshControl,
   TextInput,
 } from 'react-native';
-
 import {useDispatch, useSelector} from 'react-redux';
+
 import {VehicleListItem} from '../components';
 import {fetchDataRequest} from '../redux/actions/vehicles';
 import {
   responsiveHeight,
-  responsiveWidth,
   responsiveScreenFontSize,
   generateShortId,
 } from '../utils';
@@ -33,7 +32,6 @@ function VehiclesList() {
       (state: any) => state.vehiclesReducer,
     ),
     vehiclesData = vehiclesState?.vehicles,
-    error = vehiclesState?.error,
     isLoading = vehiclesState?.isLoading;
 
   useEffect(() => {
@@ -59,7 +57,6 @@ function VehiclesList() {
     setPages(0);
   };
 
-
   function renderHeader() {
     return (
       <View style={styles.searchView}>
@@ -74,11 +71,12 @@ function VehiclesList() {
       </View>
     );
   }
+
   return (
     <View style={styles.container}>
       {renderHeader()}
       {isLoading && currentPage === 1 ? (
-        <ActivityIndicator style={{flex: 1}} />
+        <ActivityIndicator style={styles.spinner} />
       ) : (
         <>
           {vehiclesData?.length ? (
@@ -119,8 +117,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 20,
   },
+  spinner: {
+    flex: 1,
+  },
   searchView: {
-    // display: 'flex',
     borderRadius: 35,
     borderColor: colors.white,
     height: responsiveHeight(5.5),

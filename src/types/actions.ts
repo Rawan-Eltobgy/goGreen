@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import {VehiclesState, Vehicle} from './state';
+import {Vehicle} from './state';
 import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
@@ -22,22 +22,22 @@ export interface FetchDataFailurePayload {
 }
 
 export interface FetchDataRequest extends Action {
-  type: typeof FETCH_DATA_REQUEST; // !! here we assign the string literal type of the constant
+  type: typeof FETCH_DATA_REQUEST;
   payload: FetchDataRequestPayload;
 }
 
 export interface FetchDataSuccess extends Action {
-  type: typeof FETCH_DATA_SUCCESS; // !! here we assign the string literal type of the constant
+  type: typeof FETCH_DATA_SUCCESS;
   payload: FetchDataSuccessPayload;
 }
 
 export interface FetchDataFailure extends Action {
-  type: typeof FETCH_DATA_FAILURE; // !! here we assign the string literal type of the constant
+  type: typeof FETCH_DATA_FAILURE;
   payload: FetchDataFailurePayload;
 }
 
 export interface EmptyDataRequest extends Action {
-  type: typeof EMPTY_DATA_REQUEST; // !! here we assign the string literal type of the constant
+  type: typeof EMPTY_DATA_REQUEST;
 }
 
 export type VehiclesActions =
