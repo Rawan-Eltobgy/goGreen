@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, Text, StyleSheet, View, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
@@ -12,7 +11,7 @@ import {colors} from '../config/styles';
 import {Vehicle} from '../types/state';
 
 type VehiclesListProps = {
-  vehicle: Vehicle; //to add a specific type later
+  vehicle: Vehicle;
   currentIndex: number;
 };
 function VehicleListItem({vehicle, currentIndex}: VehiclesListProps) {
@@ -99,13 +98,11 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(16),
     fontWeight: 'bold',
     letterSpacing: 1,
-    // lineHeight: responsiveScreenFontSize(14)
   },
   modelText: {
     fontSize: responsiveScreenFontSize(14),
     color: colors.tabsTextColor,
     marginBottom: 5,
-    // fontWeight: 'bold',
   },
   versionText: {
     fontSize: responsiveScreenFontSize(14),
@@ -113,7 +110,6 @@ const styles = StyleSheet.create({
   },
   energyContainer: {
     marginVertical: 5,
-    width: '65%',
   },
   showMoreContainer: {
     flexDirection: 'row',
